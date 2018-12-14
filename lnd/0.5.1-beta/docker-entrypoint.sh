@@ -17,8 +17,6 @@ if [[ "$1" == "lncli" ||"$1" == "lnd" ]]; then
 
 	cat <<-EOF > "$LND_DATA/lnd.conf"
 	${CONFIG_PREFIX}
-	bitcoin.active=1
-	bitcoin.mainnet=1
 	${BITCOIN_EXTRA_ARGS}
 	EOF
 	chown bitcoin:bitcoin "$LND_DATA/lnd.conf"

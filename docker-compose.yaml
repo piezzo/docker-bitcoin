@@ -7,12 +7,16 @@ services:
     container_name: bitcoind
     environment:
       BITCOIN_EXTRA_ARGS: |
-        whitelist=0.0.0.0/0
-        server=1
-        rpcuser=rpcuser
-        rpcpassword=rpcpass
-        prune=10000
-        disablewallet=1
+        bitcoin.active=1
+        bitcoin.mainnet=1
+        rpclisten=<your aws ip - have your firewall up!>:10009
+        bitcoind.rpchost=<your aws ip - have your firewall up!>
+        bitcoind.rpcuser=rpcuser
+        bitcoind.rpcpass=rpcpass
+        bitcoin.node=bitcoind
+        bitcoind.zmqpubrawblock=tcp://bitcoind:28332
+        bitcoind.zmqpubrawtx=tcp://bitcoind:28333
+        autopilot.active=0
     expose:
       - "18332"
     ports:
@@ -27,7 +31,7 @@ services:
   #     - --bitcoin-rpcconnect=bitcoind:8332
   #     - --bitcoin-rpcuser=rpcuser
   #     - --bitcoin-rpcpassword=rpcpass
-  #     - --network=bitcoin
+  #     - --network=testnet
   #     - --alias=piezzo-clightning
   #     - --log-level=debug
   #   environment:
@@ -49,11 +53,12 @@ services:
     container_name: lnd
     environment:
       BITCOIN_EXTRA_ARGS: |
+        bitcoin.active=1
+        bitcoin.testnet=1
         rpclisten=0.0.0.0:10009
-        bitcoind.rpchost=bitcoind:8332
+        bitcoind.rpchost=<your aws ip - have your firewall up!>:8332
         bitcoind.rpcuser=rpcuser
         bitcoind.rpcpass=rpcpass
-        bitcoin.active=1
         bitcoin.node=bitcoind
         bitcoind.zmqpubrawblock=tcp://bitcoind:28332
         bitcoind.zmqpubrawtx=tcp://bitcoind:28333
