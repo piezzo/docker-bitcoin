@@ -7,12 +7,17 @@ services:
     container_name: bitcoind
     environment:
       BITCOIN_EXTRA_ARGS: |
-        bitcoin.active=1
-        bitcoin.mainnet=1
+        whitelist=0.0.0.0/0
+        server=1
+        testnet=1
         rpclisten=<your aws ip - have your firewall up!>:10009
         bitcoind.rpchost=<your aws ip - have your firewall up!>
-        bitcoind.rpcuser=rpcuser
-        bitcoind.rpcpass=rpcpass
+        rpcuser=rpcuser
+        rpcpassword=rpcpass
+        rpcallowip=0.0.0.0/0
+        prune=3000
+        externalip=<your external ip>
+        disablewallet=1
         bitcoin.node=bitcoind
         bitcoind.zmqpubrawblock=tcp://bitcoind:28332
         bitcoind.zmqpubrawtx=tcp://bitcoind:28333
