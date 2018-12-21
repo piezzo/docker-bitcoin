@@ -22,12 +22,18 @@ services:
         bitcoind.zmqpubrawblock=tcp://bitcoind:28332
         bitcoind.zmqpubrawtx=tcp://bitcoind:28333
         autopilot.active=0
+        dbcache=100
+        maxorphantx=10
+        maxmempool=50
+        maxconnections=40
+        maxuploadtarget=500000
     expose:
       - "18332"
     ports:
       - "0.0.0.0:18333:18333"
     volumes:
       - "bitcoin_datadir:/data"
+    mem_limit: 500m
 
   # clightning_bitcoin:
   #   image: elementsproject/lightningd
@@ -74,6 +80,7 @@ services:
     volumes:
       - "clightning_bitcoin_datadir:/root/.lnd"
       - "bitcoin_datadir:/etc/bitcoin"
+    mem_limit: 300m
     links:
       - bitcoind
 
