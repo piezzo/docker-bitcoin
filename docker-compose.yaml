@@ -75,8 +75,10 @@ services:
         bitcoind.zmqpubrawtx=tcp://bitcoind:28333
     expose:
       - "9735"
+      - "10009"
     ports:
       - "0.0.0.0:9735:9735"
+      - "0.0.0.0:10009:10009"
     volumes:
       - "clightning_bitcoin_datadir:/root/.lnd"
       - "bitcoin_datadir:/etc/bitcoin"
